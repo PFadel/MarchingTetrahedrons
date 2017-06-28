@@ -26,7 +26,7 @@ public class Main {
     private float currentAngleY = 0.0f;
 
     // Projection Matrix
-    private final Projection proj = new Projection(45, -1.3333f, 0.0f, 100f);
+    private final Projection proj = new Projection(45, 1.3333f, 0.0f, 100f);
 
     // View Matrix
     private final Vector3f eye = new Vector3f(0.0f, 0.0f, 2.0f);
@@ -229,7 +229,7 @@ public class Main {
     }
 
     private RotationType currentRotation = RotationType.X;
-    private ProjectionType currentProjection = ProjectionType.P;
+    private ProjectionType currentProjection = ProjectionType.O;
 
     public void createCubes(Surface surface, float isolevel, long resolution, float xMin, float xMax, float yMin, float yMax, float zMin, float zMax) {
 

@@ -50,11 +50,11 @@ public class Piramide {
         positions.add(p5);
 
         // Fill the colors
-        Vector4f black = new Vector4f(0.3f, 0.2f, 0.1f, 1.0f);
+        Vector4f white = new Vector4f(1.0f, 1.0f, 1.0f, 1.0f);
         Vector4f red = new Vector4f(1.0f, 0.0f, 0.0f, 1.0f);
         Vector4f yellow = new Vector4f(1.0f, 1.0f, 0.0f, 1.0f);
         Vector4f green = new Vector4f(0.0f, 1.0f, 0.0f, 1.0f);
-        Vector4f blue = new Vector4f(0.5f, 0.0f, 1.0f, 1.0f);
+        Vector4f blue = new Vector4f(0.0f, 0.0f, 1.0f, 1.0f);
 
         colors.add(yellow);
         colors.add(yellow);
@@ -65,9 +65,9 @@ public class Piramide {
         colors.add(blue);
         colors.add(blue);
         colors.add(blue);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
+        colors.add(white);
+        colors.add(white);
+        colors.add(white);
         colors.add(green);
         colors.add(green);
         colors.add(green);
