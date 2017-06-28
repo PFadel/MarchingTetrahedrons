@@ -31,12 +31,12 @@ class Cube {
 
         // Fill the colors
         colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
-        colors.add(new Vector4f(1.0f, 0.0f, 0.0f, 1.0f));
+        colors.add(new Vector4f(0.0f, 1.0f, 0.0f, 1.0f));
+        colors.add(new Vector4f(0.0f, 0.0f, 1.0f, 1.0f));
+        colors.add(new Vector4f(1.0f, 1.0f, 0.0f, 1.0f));
+        colors.add(new Vector4f(0.0f, 1.0f, 1.0f, 1.0f));
+        colors.add(new Vector4f(1.0f, 0.0f, 1.0f, 1.0f));
+        colors.add(new Vector4f(1.0f, 1.0f, 1.0f, 1.0f));
+        colors.add(new Vector4f(0.5f, 0.5f, 0.5f, 1.0f));
     }
 }

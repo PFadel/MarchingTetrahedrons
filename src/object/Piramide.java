@@ -56,24 +56,24 @@ public class Piramide {
         Vector4f green = new Vector4f(0.0f, 1.0f, 0.0f, 1.0f);
         Vector4f blue = new Vector4f(0.0f, 0.0f, 1.0f, 1.0f);
 
+        colors.add(yellow);
+        colors.add(yellow);
+        colors.add(yellow);
         colors.add(red);
         colors.add(red);
         colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
-        colors.add(red);
+        colors.add(blue);
+        colors.add(blue);
+        colors.add(blue);
+        colors.add(white);
+        colors.add(white);
+        colors.add(white);
+        colors.add(green);
+        colors.add(green);
+        colors.add(green);
+        colors.add(green);
+        colors.add(green);
+        colors.add(green);
 
     }
 }
