@@ -17,9 +17,9 @@ import util.projection.Projection;
 public class Main {
 
     // Creates a new cube
-    //private final CubeGL graphicObject = new CubeGL();
+    private final CubeGL graphicObject = new CubeGL();
     //Creates a new Piramide
-    private final PiramideGL graphicObject = new PiramideGL();
+    //private final PiramideGL graphicObject = new PiramideGL();
 
     // Animation:
     private float currentAngleX = 0.0f;
@@ -37,14 +37,14 @@ public class Main {
     private final Camera cam = new Camera(eye, at, up);
 
     // Light
-    private final Vector3f lightPos = new Vector3f(0.0f, 2.0f, -2.0f);
+    private final Vector3f lightPos = new Vector3f(2.0f, 0.0f, 0.0f);
     private final Vector3f ambientColor = new Vector3f(1.0f, 1.0f, 1.0f);
     private final Vector3f diffuseColor = new Vector3f(1.0f, 1.0f, 1.0f);
     private final Vector3f speclarColor = new Vector3f(1.0f, 1.0f, 1.0f);
 
     private final float kA = 0.4f;
-    private final float kD = 0.5f;
-    private final float kS = 0.1f;
+    private final float kD = 1.5f;
+    private final float kS = 1.1f;
     private final float sN = 60.0f;
 
     // Model Matrix:

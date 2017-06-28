@@ -22,7 +22,7 @@ void main()
     // final vertex position
     gl_Position = projection * modelView * position;
 
-    vec4 newNormal = normalize(normalMatrix * normal);
+    newNormal = normalize(normalMatrix * normal);
 
     ourPostion = position;
     ourModView = modelView;
