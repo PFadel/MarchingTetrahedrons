@@ -6,7 +6,7 @@ package util.shader;
  */
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import java.io.IOException;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -89,7 +89,7 @@ public class ShaderProgram {
                 vertexCode.append(line);
                 vertexCode.append('\n');
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new IllegalArgumentException("unable to load shader from file [" + filename + "]", e);
         }
 

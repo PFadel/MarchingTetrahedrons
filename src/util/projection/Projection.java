@@ -9,10 +9,10 @@ import util.math.Matrix4f;
  */
 public class Projection {
 
-    private float fovY = 0.0f;
-    private float aspect = 0.0f;
-    private float zNear = 0.0f;
-    private float zFar = 0.0f;
+    private final float fovY;
+    private final float aspect;
+    private final float zNear;
+    private final float zFar;
 
     public Projection(float fovY, float aspect, float zNear, float zFar) {
         this.fovY = fovY;

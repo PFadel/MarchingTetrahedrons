@@ -24,7 +24,6 @@ public class Main {
     // Animation:
     private float currentAngleX = 0.0f;
     private float currentAngleY = 0.0f;
-    private float currentAngle = 0.0f;
 
     // Projection Matrix
     private final Projection proj = new Projection(45, -1.3333f, 0.0f, 100f);
@@ -212,20 +211,6 @@ public class Main {
             z = (p1.z + p2.z) / 2.0f;
         } else {
 
-            /*
-
-         <----+-----+---+----->
-              v1    |   v2
-                 isolevel
-
-
-         <----+-----+---+----->
-              0     |   1
-                  interp
-
-             */
-            // interp == 0: vert should be at p1
-            // interp == 1: vert should be at p2
             float interp = (isolevel - v1) / (v2 - v1);
             float oneMinusInterp = 1 - interp;
 
@@ -233,11 +218,6 @@ public class Main {
             y = p1.y * oneMinusInterp + p2.y * interp;
             z = p1.z * oneMinusInterp + p2.z * interp;
         }
-
-        Vector3f normal = surface.gradientAt(x, y, z);
-
-        //glNormal3f(normal.x, normal.y, normal.z);
-        //glVertex3f(x, y, z);
     }
 
     public enum RotationType {
@@ -322,7 +302,6 @@ public class Main {
                     for (int t = 0; t < 6; ++t) {
                         drawTetrahedron(surface, tetrahedra[t], isolevel);
                     }
-
                 }
             }
         }
@@ -417,23 +396,24 @@ public class Main {
     }
 
     private void setCurrentRotationAndProjectionFromInput() {
+        float delta = 0.0f;
         if (Keyboard.isKeyDown(Keyboard.KEY_R) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-            currentAngleY += 0.01f;
+            delta = 0.01f;
             currentRotation = RotationType.Y;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_L) || Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-            currentAngleY -= 0.01f;
+            delta = -0.01f;
             currentRotation = RotationType.Y;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_C) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            currentAngleX += 0.01f;
+            delta = 0.01f;
             currentRotation = RotationType.X;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_B) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            currentAngleX -= 0.01f;
+            delta = -0.01f;
             currentRotation = RotationType.X;
         }
         if (Keyboard.next()) {
@@ -450,14 +430,20 @@ public class Main {
             }
         }
 
-        currentAngle = currentAngleX + currentAngleY;
-
+        switch (currentRotation) {
+            case X:
+                currentAngleX += delta;
+                break;
+            case Y:
+                currentAngleY += delta;
+                break;
+        }
     }
 
     private Matrix4f getRotationMatrixX(float angle) {
 
-        float c = FastMath.cos(currentAngle);
-        float s = FastMath.sin(currentAngle);
+        float c = FastMath.cos(angle);
+        float s = FastMath.sin(angle);
 
         Matrix4f rotationMatrixX = new Matrix4f();
 
@@ -472,8 +458,8 @@ public class Main {
 
     private Matrix4f getRotationMatrixY(float angle) {
 
-        float c = FastMath.cos(currentAngle);
-        float s = FastMath.sin(currentAngle);
+        float c = FastMath.cos(angle);
+        float s = FastMath.sin(angle);
 
         Matrix4f rotationMatrixY = new Matrix4f();
 
@@ -489,19 +475,8 @@ public class Main {
     private Matrix4f getModelMatrix() {
         Matrix4f matrix = new Matrix4f();
         matrix.setToIdentity();
-        Matrix4f rotationMatrix;
-
-        switch (currentRotation) {
-            case X:
-                rotationMatrix = getRotationMatrixX(currentAngle);
-                break;
-            case Y:
-                rotationMatrix = getRotationMatrixY(currentAngle);
-                break;
-            default:
-                rotationMatrix = getRotationMatrixX(currentAngle);
-        }
-        matrix.multiply(rotationMatrix);
+        matrix.multiply(getRotationMatrixY(currentAngleY));
+        matrix.multiply(getRotationMatrixX(currentAngleX));
         return matrix;
     }
 
@@ -513,7 +488,7 @@ public class Main {
             case P:
                 return proj.perspective();
         }
-        return proj.perspective();
+        return proj.orthogonal();
     }
 
     /**
