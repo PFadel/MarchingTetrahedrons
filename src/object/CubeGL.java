@@ -24,13 +24,13 @@ public class CubeGL extends Cube implements ObjectGL {
     private ShaderProgram shader;
     // Buffer with the Positions
     private FloatBuffer positionBuffer;
-    
+
     // Buffer with the Positions
     private FloatBuffer normalBuffer;
- 
+
     // Buffer with the Colors
     private FloatBuffer colorBuffer;
-        
+
     //Constructor
     public CubeGL() {
         super();
@@ -81,7 +81,7 @@ public class CubeGL extends Cube implements ObjectGL {
         // unbind VBO
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
- 
+
     @Override
     public void loadShaders() {
         // compile and link vertex and fragment shaders into
@@ -91,17 +91,16 @@ public class CubeGL extends Cube implements ObjectGL {
         // do the heavy lifting of loading, compiling and linking
         // the two shaders into a usable shader program
         shader.init("shaders/phong.vert", "shaders/phong.frag");
- 
+
         // tell OpenGL to use the shader
         GL20.glUseProgram(shader.getProgramId());
     }
-    
-    public void setFloat(String nameFloat, float dataFloat){        
+
+    public void setFloat(String nameFloat, float dataFloat) {
         // defines the uniform variable
         int fltId = GL20.glGetUniformLocation(shader.getProgramId(), nameFloat);
-        GL20.glUniform1f(fltId, dataFloat);   
+        GL20.glUniform1f(fltId, dataFloat);
     }
-    
 
     public void setVector(String nameVector, Vector3f dataVector) {
         // Buffer with the Model Matrix
@@ -111,13 +110,12 @@ public class CubeGL extends Cube implements ObjectGL {
         vecBuff.clear();
         dataVector.store(vecBuff);
         vecBuff.flip();
-        
+
         // defines the uniform variable
         int vecId = GL20.glGetUniformLocation(shader.getProgramId(), nameVector);
         GL20.glUniform3(vecId, vecBuff);
     }
-    
-    
+
     public void setMatrix(String nameMatrix, Matrix4f dataMatrix) {
         // Buffer with the Model Matrix
         FloatBuffer matBuff = BufferUtils.createFloatBuffer(16);
@@ -126,7 +124,7 @@ public class CubeGL extends Cube implements ObjectGL {
         matBuff.clear();
         dataMatrix.store(matBuff);
         matBuff.flip();
-        
+
         // defines the uniform variable
         int matrixId = GL20.glGetUniformLocation(shader.getProgramId(), nameMatrix);
         GL20.glUniformMatrix4(matrixId, false, matBuff);
@@ -144,9 +142,9 @@ public class CubeGL extends Cube implements ObjectGL {
         GL20.glEnableVertexAttribArray(2); // VertexColor
 
         // draw VAO
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3*nfaces);
+        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3 * nfaces);
     }
-    
+
     @Override
     public void fillVBOs() {
         // convert vertex array to buffer
@@ -170,7 +168,6 @@ public class CubeGL extends Cube implements ObjectGL {
     }
 
     // private methods
-
     private void buildQuad(int a, int b, int c, int d) {
         positions.get(a).store(positionBuffer);
         positions.get(c).store(positionBuffer);
@@ -179,8 +176,7 @@ public class CubeGL extends Cube implements ObjectGL {
         positions.get(a).store(positionBuffer);
         positions.get(d).store(positionBuffer);
         positions.get(c).store(positionBuffer);
-        
-                
+
         positions.get(a).store(normalBuffer);
         positions.get(c).store(normalBuffer);
         positions.get(b).store(normalBuffer);
@@ -188,8 +184,7 @@ public class CubeGL extends Cube implements ObjectGL {
         positions.get(a).store(normalBuffer);
         positions.get(d).store(normalBuffer);
         positions.get(c).store(normalBuffer);
-        
-        
+
         colors.get(a).store(colorBuffer);
         colors.get(c).store(colorBuffer);
         colors.get(b).store(colorBuffer);

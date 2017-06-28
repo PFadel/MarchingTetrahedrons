@@ -24,13 +24,13 @@ public class PiramideGL extends Piramide implements ObjectGL {
     private ShaderProgram shader;
     // Buffer with the Positions
     private FloatBuffer positionBuffer;
-    
+
     // Buffer with the Positions
     private FloatBuffer normalBuffer;
- 
+
     // Buffer with the Colors
     private FloatBuffer colorBuffer;
-        
+
     //Constructor
     public PiramideGL() {
         super();
@@ -81,7 +81,7 @@ public class PiramideGL extends Piramide implements ObjectGL {
         // unbind VBO
         GL15.glBindBuffer(GL15.GL_ARRAY_BUFFER, 0);
     }
- 
+
     @Override
     public void loadShaders() {
         // compile and link vertex and fragment shaders into
@@ -91,17 +91,16 @@ public class PiramideGL extends Piramide implements ObjectGL {
         // do the heavy lifting of loading, compiling and linking
         // the two shaders into a usable shader program
         shader.init("shaders/phong.vert", "shaders/phong.frag");
- 
+
         // tell OpenGL to use the shader
         GL20.glUseProgram(shader.getProgramId());
     }
-    
-    public void setFloat(String nameFloat, float dataFloat){        
+
+    public void setFloat(String nameFloat, float dataFloat) {
         // defines the uniform variable
         int fltId = GL20.glGetUniformLocation(shader.getProgramId(), nameFloat);
-        GL20.glUniform1f(fltId, dataFloat);   
+        GL20.glUniform1f(fltId, dataFloat);
     }
-    
 
     public void setVector(String nameVector, Vector3f dataVector) {
         // Buffer with the Model Matrix
@@ -111,15 +110,14 @@ public class PiramideGL extends Piramide implements ObjectGL {
         vecBuff.clear();
         dataVector.store(vecBuff);
         vecBuff.flip();
-        
+
         // defines the uniform variable
         int vecId = GL20.glGetUniformLocation(shader.getProgramId(), nameVector);
         GL20.glUniform3(vecId, vecBuff);
     }
 
-
     public void setMatrix(String nameMatrix, Matrix4f dataMatrix) {
-	//GL20.glUseProgram(shader.getProgramId());
+        //GL20.glUseProgram(shader.getProgramId());
         // Buffer with the Model Matrix
         FloatBuffer matBuff = BufferUtils.createFloatBuffer(16);
 
@@ -127,7 +125,7 @@ public class PiramideGL extends Piramide implements ObjectGL {
         matBuff.clear();
         dataMatrix.store(matBuff);
         matBuff.flip();
-        
+
         // defines the uniform variable
         int matrixId = GL20.glGetUniformLocation(shader.getProgramId(), nameMatrix);
         GL20.glUniformMatrix4(matrixId, false, matBuff);
@@ -145,9 +143,9 @@ public class PiramideGL extends Piramide implements ObjectGL {
         GL20.glEnableVertexAttribArray(2); // VertexColor
 
         // draw VAO
-        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3*ntriangles);
+        GL11.glDrawArrays(GL11.GL_TRIANGLES, 0, 3 * ntriangles);
     }
-    
+
     @Override
     public void fillVBOs() {
         // convert vertex array to buffer
@@ -156,16 +154,16 @@ public class PiramideGL extends Piramide implements ObjectGL {
         normalBuffer = BufferUtils.createFloatBuffer(4 * 3 * ntriangles); //4(coordinates)*3(vertices)*12(triangles)
         // convert color array to buffer
         colorBuffer = BufferUtils.createFloatBuffer(4 * 3 * ntriangles); //4(coordinates)*3(vertices)*12(triangles)
-        
-        for (int i =0; i< positions.size(); i++){
+
+        for (int i = 0; i < positions.size(); i++) {
             positions.get(i).store(positionBuffer);
             positions.get(i).store(normalBuffer);
             colors.get(i).store(colorBuffer);
         }
-        
+
         positionBuffer.flip();
         normalBuffer.flip();
         colorBuffer.flip();
     }
-    
+
 }

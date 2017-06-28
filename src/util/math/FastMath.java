@@ -12,16 +12,19 @@ import java.util.Random;
  * @author João Vicente P. Reis Filho
  */
 public final class FastMath {
+
     public static final float PI = (float) Math.PI;
 
     public static final float DEG_TO_RAD = (float) (Math.PI / 180.0);
     public static final float RAD_TO_DEG = (float) (180.0 / Math.PI);
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
-    /** Prevents instantiation. */
-    private FastMath() {}
-
+    /**
+     * Prevents instantiation.
+     */
+    private FastMath() {
+    }
 
     public static float sin(float a) {
         return (float) Math.sin(a);

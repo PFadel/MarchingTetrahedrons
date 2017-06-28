@@ -10,7 +10,7 @@ import util.math.Vector3f;
 public class Camera {
 
     private Vector3f cameraPt = new Vector3f();
-    private Vector3f cameraAt = new Vector3f(); 
+    private Vector3f cameraAt = new Vector3f();
     private Vector3f cameraUp = new Vector3f();
 
     public Camera(Vector3f eye, Vector3f at, Vector3f up) {
@@ -21,22 +21,28 @@ public class Camera {
 
     public Matrix4f viewMatrix() {
 
-        float eyeX = cameraPt.x; float eyeY = cameraPt.y; float eyeZ = cameraPt.z;
-        float atX  = cameraAt.x; float atY  = cameraAt.y; float atZ  = cameraAt.z;
-        float upX  = cameraUp.x; float upY  = cameraUp.y; float upZ  = cameraUp.z;
-        
+        float eyeX = cameraPt.x;
+        float eyeY = cameraPt.y;
+        float eyeZ = cameraPt.z;
+        float atX = cameraAt.x;
+        float atY = cameraAt.y;
+        float atZ = cameraAt.z;
+        float upX = cameraUp.x;
+        float upY = cameraUp.y;
+        float upZ = cameraUp.z;
+
         //n = at - eye ------------------------------------
         Vector3f tempViewN = new Vector3f();
         tempViewN.setTo(atX, atY, atZ, 0);
         tempViewN.subtract(eyeX, eyeY, eyeZ);
         tempViewN.normalize();
         // ------------------------------------------------
-        
+
         //up ----------------------------------------------
         Vector3f tempViewUP = new Vector3f();
         tempViewUP.setTo(upX, upY, upZ, 0);
         // ------------------------------------------------
-        
+
         //v = up ortogonal a n ----------------------------
         Vector3f tempViewV = new Vector3f();
         tempViewV.setTo(tempViewUP);
@@ -48,7 +54,7 @@ public class Camera {
         tempViewV.subtract(tempViewV2);
         tempViewV.normalize();
         // ------------------------------------------------
-        
+
         //u = vxn -----------------------------------------
         Vector3f tempViewU = new Vector3f();
         tempViewV.crossProduct(tempViewN, tempViewU);
@@ -56,18 +62,30 @@ public class Camera {
         // ------------------------------------------------
 
         Matrix4f tempRotation = new Matrix4f();
-        tempRotation.m11 = tempViewU.x;  tempRotation.m21 = tempViewU.y;  tempRotation.m31 = tempViewU.z;  tempRotation.m41 = 0.0f;
-        tempRotation.m12 = tempViewV.x;  tempRotation.m22 = tempViewV.y;  tempRotation.m32 = tempViewV.z;  tempRotation.m42 = 0.0f;
-        tempRotation.m13 =-tempViewN.x;  tempRotation.m23 =-tempViewN.y;  tempRotation.m33 =-tempViewN.z;  tempRotation.m43 = 0.0f;
-        tempRotation.m14 = 0.0f;         tempRotation.m24 = 0.0f;         tempRotation.m34 = 0.0f;         tempRotation.m44 = 1.0f;
+        tempRotation.m11 = tempViewU.x;
+        tempRotation.m21 = tempViewU.y;
+        tempRotation.m31 = tempViewU.z;
+        tempRotation.m41 = 0.0f;
+        tempRotation.m12 = tempViewV.x;
+        tempRotation.m22 = tempViewV.y;
+        tempRotation.m32 = tempViewV.z;
+        tempRotation.m42 = 0.0f;
+        tempRotation.m13 = -tempViewN.x;
+        tempRotation.m23 = -tempViewN.y;
+        tempRotation.m33 = -tempViewN.z;
+        tempRotation.m43 = 0.0f;
+        tempRotation.m14 = 0.0f;
+        tempRotation.m24 = 0.0f;
+        tempRotation.m34 = 0.0f;
+        tempRotation.m44 = 1.0f;
 
         Matrix4f tempTranslation = new Matrix4f();
         tempTranslation.m41 = -eyeX;
         tempTranslation.m42 = -eyeY;
         tempTranslation.m43 = -eyeZ;
-        
-        tempRotation.multiply(tempTranslation);        
-        
+
+        tempRotation.multiply(tempTranslation);
+
         return tempRotation;
     }
 }

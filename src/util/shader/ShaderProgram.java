@@ -11,6 +11,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
 public class ShaderProgram {
+
     // OpenGL handle that will point to the executable shader program
     // that can later be used for rendering
     private int programId;
@@ -20,7 +21,7 @@ public class ShaderProgram {
         programId = GL20.glCreateProgram();
 
         // load and compile the two shaders
-        int vertShader = loadAndCompileShader(vertexShaderFilename,   GL20.GL_VERTEX_SHADER);
+        int vertShader = loadAndCompileShader(vertexShaderFilename, GL20.GL_VERTEX_SHADER);
         int fragShader = loadAndCompileShader(fragmentShaderFilename, GL20.GL_FRAGMENT_SHADER);
 
         // attach the compiled shaders to the program
@@ -81,7 +82,7 @@ public class ShaderProgram {
      */
     private String loadFile(String filename) {
         StringBuilder vertexCode = new StringBuilder();
-        String line = null;
+        String line;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filename));
             while ((line = reader.readLine()) != null) {
