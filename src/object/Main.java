@@ -17,9 +17,9 @@ import util.projection.Projection;
 public class Main {
 
     // Creates a new cube
-    private final CubeGL graphicObject = new CubeGL();
+    //private final CubeGL graphicObject = new CubeGL();
     //Creates a new Piramide
-    //private final PiramideGL graphicObject = new PiramideGL();
+    private final PiramideGL graphicObject = new PiramideGL();
 
     // Animation:
     private float currentAngleX = 0.0f;
@@ -321,7 +321,7 @@ public class Main {
         // set up window and display
         Display.setDisplayMode(new DisplayMode(width, height));
         Display.setVSyncEnabled(true);
-        Display.setTitle("Shader OpenGL Hello");
+        Display.setTitle("OpenGL Fadel");
 
         // set up OpenGL to run in forward-compatible mode
         // so that using deprecated functionality will
@@ -398,22 +398,22 @@ public class Main {
     private void setCurrentRotationAndProjectionFromInput() {
         float delta = 0.0f;
         if (Keyboard.isKeyDown(Keyboard.KEY_R) || Keyboard.isKeyDown(Keyboard.KEY_RIGHT)) {
-            delta = 0.01f;
+            delta = -0.01f;
             currentRotation = RotationType.Y;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_L) || Keyboard.isKeyDown(Keyboard.KEY_LEFT)) {
-            delta = -0.01f;
+            delta = 0.01f;
             currentRotation = RotationType.Y;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_C) || Keyboard.isKeyDown(Keyboard.KEY_DOWN)) {
-            delta = 0.01f;
+            delta = -0.01f;
             currentRotation = RotationType.X;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_B) || Keyboard.isKeyDown(Keyboard.KEY_UP)) {
-            delta = -0.01f;
+            delta = 0.01f;
             currentRotation = RotationType.X;
         }
         if (Keyboard.next()) {
@@ -465,8 +465,8 @@ public class Main {
 
         //rotaçao em torno de y
         rotationMatrixY.m11 = c;
-        rotationMatrixY.m31 = s;
-        rotationMatrixY.m13 = -s;
+        rotationMatrixY.m31 = -s;
+        rotationMatrixY.m13 = s;
         rotationMatrixY.m33 = c;
 
         return rotationMatrixY;
