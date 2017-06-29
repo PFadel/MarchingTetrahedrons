@@ -416,18 +416,13 @@ public class Main {
             delta = 0.01f;
             currentRotation = RotationType.X;
         }
-        if (Keyboard.next()) {
-            if (Keyboard.getEventKeyState()) {
-                int input = Keyboard.getEventKey();
-                switch (input) {
-                    case Keyboard.KEY_O:
-                        currentProjection = ProjectionType.O;
-                        break;
-                    case Keyboard.KEY_P:
-                        currentProjection = ProjectionType.P;
-                        break;
-                }
-            }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_O)) {
+            currentProjection = ProjectionType.O;
+        }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_P)) {
+            currentProjection = ProjectionType.P;
         }
 
         switch (currentRotation) {
